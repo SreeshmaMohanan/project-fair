@@ -11,7 +11,7 @@ function ProjectCard() {
             <Card style={{ width: '18rem' }}>
                 <Card.Img onClick={handleShow} variant="top" src="https://s3-ap-south-1.amazonaws.com/static.awfis.com/wp-content/uploads/2017/07/07184649/ProjectManagement.jpg" />
                 <Card.Body>
-                    <Card.Title className='text-center'>Card Title</Card.Title>
+                    <Card.Title className='text-center'>Project Title</Card.Title>
 
 
                 </Card.Body>

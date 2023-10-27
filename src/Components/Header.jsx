@@ -1,14 +1,16 @@
 import React from 'react'
+import { Container, Navbar } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 function Header() {
   return (
     <div>
-         <Navbar className="bg-body-tertiary">
+         <Navbar className="bg-dark">
         <Container>
-          <Navbar.Brand href="#home">
-          <i class="fa-regular fa-gear fa-spin text-light"></i>  {' '}
+          <Link to='/' style={{textDecoration:'none',color:"white",height:'80px',fontSize:'50px'}}>
+          <i class="fa-solid fa-gear fa-spin text-light"></i>  {' '}
             Project-Fair
-          </Navbar.Brand>
+          </Link>
         </Container>
       </Navbar>
     </div>
