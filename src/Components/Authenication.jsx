@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form} from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { registerAPI } from '../services/allAPI'
+import { loginAPI, registerAPI } from '../services/allAPI'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -32,6 +32,29 @@ function Authenication({register}) {
             }
             
         
+        }
+
+    }
+    const handleLogin=async(e)=>{
+        e.preventDefault()
+        const {email,password}=userData
+        if(!email || !password){
+            toast.error("Email or password can not be empty")
+            }else{
+                const result =await loginAPI(userData)
+                if(result.status===200){
+                    sessionStorage.setItem("existingUser",JSON.stringify(result.data.existingUser))
+                    sessionStorage.setItem("token",result.data.token)
+                    setUserData({
+                        email:"",
+                        password:""
+                    })
+                    navigate('/')
+                }else{
+                    toast.error("Invalid Email or Password")
+                    console.log(result);
+                }
+
         }
 
     }
@@ -75,7 +98,7 @@ function Authenication({register}) {
                                                 <p>Already Have An Account? Click here to <Link to='/login'>Login</Link></p>
                                             </div>:
                                             <div>
-                                                <button className="btn btn-light mb-2">Login</button>
+                                                <button onClick={handleLogin} className="btn btn-light mb-2">Login</button>
                                                 <p>New User? Click here to <Link to='/register'>Register</Link></p>
                                             </div>
                                         }

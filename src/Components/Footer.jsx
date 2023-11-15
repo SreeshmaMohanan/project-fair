@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
-    <div style={{width:'100%',height:'400px'}}className='text-light d-flex justify-content-center align-items-center flex-column flex-wrap bg-dark'>
+    <div style={{width:'auto',height:'400px'}}className='text-light d-flex justify-content-center align-items-center flex-column flex-wrap bg-dark'>
         <div className='footer-content d-flex'>
             <div className="website m-5 " style={{width:'400px'}}>
                 <h4>
