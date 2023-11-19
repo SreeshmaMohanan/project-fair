@@ -33,13 +33,10 @@ const [token,setToken]=useState("")
         reqBody.append("projectImage",projectImage)
         reqBody.append("website",website)
       if(token){
-       reqHeader={
+      const  reqHeader={
           "Content-Type":"multipart/form-data",
           "Authorization":`Bearer ${token}`
         }
-        
-      }
-        
         const result= await addProjectAPI(reqBody,reqHeader)
         if(result.status===200){
           console.log(result.data);
@@ -47,6 +44,9 @@ const [token,setToken]=useState("")
           console.log(result);
           console.log(result.response.data);
         }     
+        
+      }
+        
       }
     }
     const handleShow = () => setShow(true);
