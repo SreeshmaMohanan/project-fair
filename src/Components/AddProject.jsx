@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import { addProjectAPI } from '../services/allAPI';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddProject() {
   const [projectDetails,setProjectDetails]=useState({
@@ -23,7 +25,7 @@ const [token,setToken]=useState("")
       e.preventDefault();
       const {title,languages,overview,github,projectImage,website}=projectDetails
       if(!title||!languages||!overview||!github||!projectImage||!website){
-        alert('Please fill all fields')
+        toast.info('Please fill all fields')
       }else{
         const reqBody= new FormData()
         reqBody.append("title",title)
@@ -40,9 +42,13 @@ const [token,setToken]=useState("")
         const result= await addProjectAPI(reqBody,reqHeader)
         if(result.status===200){
           console.log(result.data);
+          handleClose()
+          toast.success(`Project added`)
+
+
         }else{
           console.log(result);
-          console.log(result.response.data);
+          toast.warning(result.response.data);
         }     
         
       }
@@ -90,10 +96,10 @@ const [token,setToken]=useState("")
                <div className='mb-3'> <input type="text" className="form-control"placeholder='Language used'value={projectDetails.languages} onChange={(e)=>setProjectDetails({...projectDetails,languages:e.target.value})} /></div>
                <div className='mb-3'> <input type="text" className="form-control" placeholder='Github link' value={projectDetails.github} onChange={(e)=>setProjectDetails({...projectDetails,github:e.target.value})} /></div>
                <div className='mb-3'>
-                    <input type="text" className="form-control" placeholder='Linkedin link' value={projectDetails.website} onChange={(e)=>setProjectDetails({...projectDetails,website:e.target.value})} />
+                    <input type="text" className="form-control" placeholder='website link' value={projectDetails.website} onChange={(e)=>setProjectDetails({...projectDetails,website:e.target.value})} />
                 </div>
                 <div className='mb-3'>
-                    <input type="text" className="form-control" placeholder='Project overview' />
+                    <input type="text" className="form-control" value={projectDetails.overview} onChange={(e)=>setProjectDetails({...projectDetails,overview:e.target.value})} placeholder='Project overview' />
                 </div>
                </div>
         </div>
@@ -106,7 +112,13 @@ const [token,setToken]=useState("")
         Save
       </Button>
     </Modal.Footer>
-  </Modal></div>
+  </Modal>
+  <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        theme="colored"
+        />
+  </div>
   )
 }
 
